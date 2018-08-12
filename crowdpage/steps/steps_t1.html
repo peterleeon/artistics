@@ -1,0 +1,48 @@
+<div ng-show='startRecording' >
+  <ul>
+    <li>Navigation the web on the right to accomplish a given task</li>
+    <li>Goal is to find all possible paths that a future user may take to perform the same task. </li>
+    <li>Use the visualization tool (click 'Start' to see). </li>
+    <li>Click 'Done' button if you think you found all.</li>
+  </ul>
+</br>
+  <div>
+    <b>Task:</b> Purchase any two kinds of toy cars with one each.  
+    <!-- <b>Task:</b>  Find a page that has the item "Watermelon". -->
+  </div>
+</br>
+<ul>
+  <li>Please watch the tutorial first: <a href='https://youtu.be/jc7IZMRThkY' target="_blank">Youtube</a> </li>
+  <li>The block in <font color="red">red</font> indicates the current state you are at.</li>
+  <li>Click each 'State' block to jump to that specific state and explore other possible transitions.</li>
+</ul>
+<!-- <p>Your current coverage rate is: {{coverageRate}}%</p> -->
+
+<div class="col-sm-12" style='margin-left: -35px'>
+    <div class="col-sm-6" id='showexample1'>
+    </div>
+    </div>
+  <!-- <ul>
+    <li>Worker 1 has done this task with the steps listed below.</li>
+    <li>Avoid worker 1's path which is highlighed with red dotted line <font color="red">---</font>, and find a new way to accomplish the task. </li>
+    <li>Restart the task if you are lost or you want to regenerate the steps.</li>
+    <li>Note: click 'Next' then 'Pre' then 'Next' is not a new path.</li>
+  </ul>
+  <p>Worker 1's steps: (<font color="red">please do not do the same thing</font>)</p>
+  <div ng-repeat='step in otherWorkerSteps.task1 track by $index'>
+    <p>Step {{$index}}: {{step.action}} {{step.element}}</p>
+  </div> -->
+  <hr>
+  <!-- <p>Your steps are recorded here:</p>
+  <div ng-repeat='step in currentWorkerSteps track by $index'>
+    <p>Step {{$index}}: {{step.action=='keypress'?'type':'click'}} {{step.key=='Enter'?"Enter":""}} {{step.action=='keypress'?'in':''}} {{step.element}}</p>
+  </div> -->
+</div>
+
+<!-- <p>Step {{$index}}: {{step.action}} {{step.element}}<button ng-click='shop.showStep(step)'>Show</button></p> -->
+<button id='submitFirstTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='shop.submit()' ui-sref="steps.thankyoupage">Done</button>
+<button id='restartFirstTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='restartStepsConditionFirstTask()'>Go to the start!</button>
+
+<!-- <button id='restartFirstTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='restartStepsConditionFirstTask()'>Restart</button> -->
+
+<button id='startFirstTask' class='btn btn-success' ng-hide='startRecording' ng-click='startStepsConditionFirstTask()'>Start</button>

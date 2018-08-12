@@ -1,0 +1,26 @@
+<div ng-show='startRecording'>
+    <ul>
+      <li>Navigation the web on the right to accomplish a given task</li>
+      <li>Goal is to find all possible paths that a future user may take to perform the same task. </li>
+      <li>Click 'Go to the start' to find another path.</li>
+      <li>Click 'Done' button if you think you found all.</li>
+      <li>Please watch the tutorial first: <a href='https://youtu.be/XFwVI7dqgXA' target="_blank">Youtube</a> </li>
+    </ul>
+  </br>
+    <div>
+      <b>Task:</b> Purchase any two kinds of toy cars with one each.  
+      
+      <!-- <b>Task:</b>  Find a page that has the item "Watermelon". -->
+    </div>
+  </br>
+  <!-- <p>Your current coverage rate is: {{coverageRate}}%</p> -->
+</div>
+<!-- <p>Step {{$index}}: {{step.action}} {{step.element}}<button ng-click='shop.showStep(step)'>Show</button></p> -->
+<button id='submitFirstTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='shop.submit()' ui-sref="steps.thankyoupage">Done</button>
+
+<button id='restartFirstTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='restartStepsConditionFirstTask()'>Go to the start!</button>
+
+<button id='startFirstTask' class='btn btn-success' ng-hide='startRecording' ng-click='startStepsConditionFirstTask()'>Start</button>
+
+<div class="col-sm-6" id='showexample1' style='display: none;'>
+  </div>

@@ -1,0 +1,25 @@
+<div ng-show='startRecording'>
+  <div>
+    Task description: Navigate to a page that has the item Watermelon.
+  </div>
+</br>
+  <ul>
+    <li>Worker 3 has done this task with the steps listed below.</li>
+    <li>Avoid worker 3's path which is highlighed with red dotted line <font color="red">---</font>, and find a new way to accomplish the task. </li>
+    <li>Restart the task if you are lost or you want to regenerate the steps.</li>
+    <li>Note: click 'Next' then 'Pre' then 'Next' is not a new path.</li>
+  </ul>
+  <p>Worker 3's steps: (<font color="red">please do not do the same thing</font>)</p>
+  <div ng-repeat='step in otherWorkerSteps.task3 track by $index'>
+    <p>Step {{$index}}: {{step.action}} {{step.element}}</p>
+  </div>
+  <hr>
+  <p>Your steps are recorded here:</p>
+  <div ng-repeat='step in currentWorkerSteps track by $index'>
+    <p>Step {{$index}}: {{step.action=='keypress'?'type':'click'}} {{step.key=='Enter'?"Enter":""}} {{step.action=='keypress'?'in':''}} {{step.element}}</p>
+  </div>
+</div>
+
+<!-- <p>Step {{$index}}: {{step.action}} {{step.element}}<button ng-click='shop.showStep(step)'>Show</button></p> -->
+<button id='submitThridTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='shop.submit()' ui-sref="steps.thankyoupage">Submit</button>
+<button id='restartThridTaskButton' class='btn btn-success' ng-show='startRecording' ng-click='restartStepsConditionThirdTask()'>Restart</button>

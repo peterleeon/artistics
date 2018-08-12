@@ -1,0 +1,105 @@
+
+/* Remove the navbar's default rounded borders and increase the bottom margin */
+.navbar {
+ margin-bottom: 50px;
+ border-radius: 0;
+}
+
+/* Remove the jumbotron's default bottom margin */
+.jumbotron {
+ margin-bottom: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+footer {
+ background-color: #f2f2f2;
+ padding: 25px;
+}
+
+.vl {
+  float: right;
+  border-left: 3px solid black;
+  height: 1200px;
+}
+
+.row {
+  margin: 10px;
+  margin-top: 26px;
+}
+
+.dialog {
+  border: 2px solid red;
+  border-radius: 5px;
+  height: 50px;
+  position: relative;
+  width: 180px;
+}
+
+/* .btn-warning {
+  border: 2px dotted red;
+  box-sizing: border-box;
+} */
+
+div.elementlistwrap {
+  border: 4px dotted red;
+}
+
+div.filterwrap {
+  border: 2px dotted red;
+}
+
+div.searchwrap {
+  border: 2px dotted red;
+}
+
+div.cartwrap {
+  border: 2px dotted red;
+}
+
+svg {
+  border: 1px solid #999;
+  overflow: hidden;
+}
+/* This sets the color for "TK" nodes to a light blue green. */
+g.type-TK > rect {
+  fill: #00ffd0;
+}
+
+text {
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+  font-size: 14px;
+}
+
+.node rect {
+  stroke: #999;
+  fill: #fff;
+  stroke-width: 1.5px;
+}
+
+.edgePath path {
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+.filterButtons {
+  display: inline-block;
+}
+
+input {
+  width: 400px;
+}
+
+.bar {
+  display: inline;
+}
+.modal-backdrop {background: none;}
+
+.twosvg {
+  display: inline-block;
+  vertical-align: top;
+}
+
+img {
+  max-height: 220px;
+}

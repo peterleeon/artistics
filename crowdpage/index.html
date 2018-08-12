@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+   <head>
+      <title>My Shopping Site</title>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-animate.js"></script>
+      <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.1/angular-ui-router.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'></script>
+      <script src="https://d3js.org/d3.v4.js"></script>
+      <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+      <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.js"></script>
+      <link rel="stylesheet" href="style.css">
+      <script src="router.js" charset="utf-8"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+      <script src="node_modules/t2sm/built/bundle.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDZBg9-TfWqQCBfB2ogOE7LHEYMak_qPC4",
+          authDomain: "crowd-18070.firebaseapp.com",
+          databaseURL: "https://crowd-18070.firebaseio.com",
+          projectId: "crowd-18070",
+          storageBucket: "",
+          messagingSenderId: "216133034197"
+        };
+        firebase.initializeApp(config);
+      </script>
+   </head>
+   <body ng-app="myTestApp">
+     <script>
+     // var finalResult = []
+     // $('body').on("click keypress",function(e){
+     //   console.log(e.type,e.target.getAttribute('id'));
+     //   if (e.target.getAttribute('id')) {
+     //     if (e.type == 'click') {
+     //       finalResult.push({
+     //         type: e.type,
+     //         elementId: e.target.getAttribute('id'),
+     //         url: $(location).attr('href'),
+     //         time: (new Date()).getTime()
+     //       })
+     //     }
+     //     if (e.type == 'keypress') {
+     //       finalResult.push({
+     //         type: e.type,
+     //         content: e.key,
+     //         elementId: e.target.getAttribute('id'),
+     //         url: $(location).attr('href'),
+     //         time: (new Date()).getTime()
+     //       })
+     //     }
+     //
+     //   }
+     //  });
+     </script>
+     <div ui-view></div>
+   </body>
+   <script src="crowd.js" charset="utf-8"></script>
+</html>

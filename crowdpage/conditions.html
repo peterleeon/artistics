@@ -1,0 +1,184 @@
+<div class="col-sm-2" style='width: 35%' ng-click='eventsOnTheTaskPanel($event)' ng-keypress="eventsOnTheTaskPanel($event)">
+  <div class='sidebar'>
+     <h1>Your task</h1>
+     <div ng-hide='showInstructions'>
+        <ul>
+           <li>First, maximize your browser and play with the user interface on the right.</li>
+           <li>Once ready, click 'Start'.</li>
+           <!-- <li>Extra 20% as a bonus if you find them all.</li> -->
+        </ul>
+     </div>
+  </div>
+  </br>
+  <!-- different conditions -->
+  <ui-view></ui-view>
+  <div class="col-sm-12" style='padding-left: 0px'>
+     <!-- <button id='foundBugButton' class='btn btn-success' ng-click='shop.bugReport()'>Report bugs</button> -->
+     </br>
+     <textarea id='bugReportContentTextarea' rows='5' cols='30' ng-model='shop.bugReportContent' ng-show='bugReportText'></textarea>
+     </br>
+     <button id='cancelugReportButton' class='btn btn-danger' ng-click='shop.cancelBugReport()' ng-show='bugReportText'>Cancel</button>
+     <button id='submitBugReportButton' class='btn btn-success' ng-click='shop.submitBugReport()' ng-show='bugReportText'>Submit report</button>
+  </div>
+</div>
+<div class="col-sm-1" style='width: 0.333333%; z-index: -10000'>
+  <div class="vl"></div>
+</div>
+
+
+<!-- shopping website  -->
+<div class="col-sm-9" style='height: 1200px; width: 60%; overflow: auto' ng-click='clicking($event)' ng-keypress="clicking($event)">
+  <div id='homepage' ng-hide = 'openshoppingcart || opendelivery || allset'>
+  <div id='searchwrap'>
+     <div class='row'>
+        <div class="bar">
+           <!-- Create a binding between the searchString model and the text field -->
+           <input id="searchBox" style='width: 400px; display: inline;' type="text" placeholder="Enter your search terms (press Enter key to search)" ng-model="shop.searchString" ng-keypress="$event.keyCode == 13 && shop.search()" uib-typeahead="item.itemName for item in shop.items | filter:{itemName:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="1"/>
+        </div>
+     </div>
+  </div>
+  <div class='row' style='display: inline;'>
+     <!-- filter -->
+     <div id='filterwrap' style='display: inline-block'>
+        Tags:
+        <div class='filterButtons' ng-repeat="tag in shop.tags">
+           <button id='{{"filterButton-"+$index}}' class='btn btn-success' ng-click='shop.filterItems(tag)'>{{tag}}</button>
+        </div>
+     </div>
+     <button id="cartOpenButton" ng-click='shop.openCartPanel()' class='btn btn-warning' style='float: right'><span class="glyphicon glyphicon-shopping-cart"></span>My Shopping Cart  {{shop.numItems}}</button>
+     <!-- <button id="cartOpenButton" ng-click='shop.openCartPanel()' class='btn btn-warning' style='float: right' data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-shopping-cart"></span>Cart {{shop.numItems}}</button> -->
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+           <div id='cartwrap'>
+              <div class="modal-content">
+                 <div class="modal-header">
+                    <button id="cartCloseButton" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Item list</h4>
+                 </div>
+                 <div class="modal-body">
+                    <p ng-repeat="item in shop.addedItemListCache">
+                       {{item.itemName}} Qty: <select id="{{'quantitySelectionInTheCartForItem-'+item.itemName}}" ng-model="item.itemQty" ng-options="x for x in shop.quantity"></select>
+                       <button id="{{'detele-'+item.itemName}}" style='float:right' class='btn btn-danger' ng-click='shop.removeItem(item)'>Delete</button>
+                       </br></br>
+                    </p>
+                 </div>
+                 <div class="modal-footer">
+                    <button id="saveItemButton" type="button" class="btn btn-default" ng-click='shop.saveItem(shop.addedItemListCache)' data-dismiss="modal">Save</button>
+                 </div>
+              </div>
+              <!-- /.modal-content -->
+           </div>
+           <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+     </div>
+  </div>
+  <hr>
+  <h1>Shopping Item List</h1>
+  <div>
+     <div class="row">
+        <!-- <div ng-show = "shop.checkItem(item)" ng-repeat='item in selectedItems | limitTo:numItem:startItem | orderBy: "itemName"' > -->
+        <div class="shoppingList" ng-repeat='item in selectedItems | orderBy: "itemName" | limitTo:numItem:startItem' >
+           <div class="col-sm-3">
+              <div class="panel panel-primary">
+                 <div class="panel-heading">Item: {{item.itemName}}<span class='glyphicon glyphicon-tag' style='float: right'>{{item.category}}</span></div>
+                 <div class="panel-body"><img ng-src="{{item.imgURL}}" class="img-responsive" style="width:100%" alt="Image"></div>
+                 <div class="panel-footer" style='display: inline-block'>
+                    <p id='dropdownList' style='float: left' >Qty: <select id="{{'quantitySelectionForItem-'+item.itemName}}" ng-model="numberOfItem" ng-options="x for x in shop.quantity"></select></p>
+                    <button id='{{"cartButton-"+item.itemName}}' class='btn-info' ng-click='shop.buyItem(item, numberOfItem)'>Add to cart</button>
+                    <button>Write a review</button>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <div id='elementlistwrap' style='text-align: center;'>
+        <button id="prevButton"  class='btn btn-success' ng-show='shop.disablePrePageButton()' ng-click='shop.prePage()'>Prev</button>
+        <button id="nextButton" class='btn btn-success' ng-show='shop.disableNextPageButton()' ng-click='shop.nextPage()'>Next</button>
+     </div>
+  </div>
+  </div>
+
+  <!-- shopping cart -->
+  <div id='shoppingcart' ng-show='openshoppingcart'>
+    <button ng-click='gobacktohomepage()'>Go back</button>
+    <h4 id="gobacktohomefromshoppingcart">My shopping cart</h4>
+     <div ng-repeat="item in shop.addedItemListCache">
+      <div class="panel panel-default">
+          <div class="panel-body">
+            <div class='col-sm-12'>
+              <div class='col-sm-3'>
+                  <img ng-src="{{item.imgURL}}" class="img-responsive"> 
+              </div>
+              <div class='col-sm-7'>
+                  {{item.itemName}} Qty: <select id="{{'quantitySelectionInTheCartForItem-'+item.itemName}}" ng-model="item.itemQty" ng-options="x for x in shop.quantity"></select>
+              </div>
+              <div class='col-sm-7'>
+                  <button id="{{'detele-'+item.itemName}}" style='float:right' class='btn btn-danger' ng-click='shop.removeItem(item)'>Delete</button>
+              </div>
+            </div>
+        </div>
+       </div>
+      </div>
+       <div>
+          <button id="saveItemButton" type="button" class="btn btn-default" ng-click='shop.saveItem(shop.addedItemListCache)'>Purchase</button>
+       </div>
+      
+  </div>
+
+  <!-- delivery -->
+  <div id='delivery' ng-show='opendelivery'>
+      <button ng-click='gobacktohomepage()'>Go back</button>
+      <h4 id="gobacktohomefromshoppingcart">Delivery Infromation</h4>
+      <div>
+        <h6>Personal Informaiton</h6>
+        <div ng-repeat='info in personalInfo track by $index'>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <ul>
+                <li>Home address: {{info.home}}</li>
+                <li>Phone: {{info.phone}}</li>
+                <li>Email: {{info.email}}</li>
+              </ul>
+              <button id="{{'personalinfodetele-'+$index}}" style='float:right' class='btn btn-danger' ng-click='removePersonalInfo(info)'>Delete</button>
+            </div>
+          </div>
+        </div>
+        
+        <button class='btn btn-default' ng-click='addnewpersonalinformation()'>{{addinfo}}</button>
+        <form ng-show='adding' ng-submit="submitNewPersonalInfo()" >
+            home:<input type="text" ng-model="temphome" name="text" /></br>
+            phone: <input type="text" ng-model="tempphone" name="text" /></br>
+            email: <input type="text" ng-model="tempemail" name="text" /></br>
+            <input type="submit" id="submit" value="Submit"/>
+            
+          </form>
+      </div>
+      <hr>
+      <div>
+        <h6>Time Preference</h6>
+        <form action="">
+          <input type="radio" name="gender" value="male">One day shipping<br>
+          <input type="radio" name="gender" value="female">Two days shipping<br>
+        </form>
+        <p>Choose your own delivery time: </p>
+        Delivery Date: <input type="date" name="dday" min="2018-08-12">
+      </div>
+      <hr>
+      <div>
+        <button id="saveItemButton" type="button" class="btn btn-default" ng-click='thankyoupage()'>Buy!</button>
+      </div>
+  </div>
+
+  <!-- all set -->
+  <div id='allset' ng-show='allset'>
+    <button ng-click='gobacktohomepage()'>Go back</button>
+  </br>
+    <img src='images/allset.png'/>
+    <h1>Thank you for your purchase!</h1>
+  </div>
+
+
+
+</div>
+<br><br>
